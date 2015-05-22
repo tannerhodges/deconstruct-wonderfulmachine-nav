@@ -3138,6 +3138,7 @@ table {
     font-family: "Factoria W00 Medium", serif;
     font-weight: normal;
 }
+/*
 @font-face {
     font-family: "Factoria W00 Light";
     src: url("../fonts/40cb3f15-d25a-43de-b626-f772f054c6d0.eot?#iefix");
@@ -3148,6 +3149,7 @@ table {
     src: url("../fonts/097c7a38-0834-4a9d-8af2-75cced6b5a26.eot?#iefix");
     src: url("../fonts/097c7a38-0834-4a9d-8af2-75cced6b5a26.eot?#iefix") format("eot"), url("../fonts/6f35c49f-3cfa-4001-b6d1-3f7938ab4e25.woff") format("woff"), url("../fonts/5a5ca4b8-6bf4-4a42-bd63-e54bc7ee3c08.ttf") format("truetype"), url("../fonts/bc02095b-be56-4e62-ba1d-155176b125f6.svg#bc02095b-be56-4e62-ba1d-155176b125f6") format("svg");
 }
+*/
 .max-width, .page, .blog-page, .search {
     max-width: 75em;
     margin: 0 auto;
@@ -3660,7 +3662,7 @@ table {
     .footer-content_opac {
     opacity: 0.35;
     display: block;
-    background: url('grunticon/png/wm-logo-big.png');
+    /*background: url('grunticon/png/wm-logo-big.png');*/
     background-position: center center;
     background-repeat: no-repeat;
     position: absolute;
@@ -3915,7 +3917,7 @@ table {
     color: white;
 }
 .page--body .button-call:hover:after, .aside--text .button-call:hover:after {
-    background-image: url('/static/dist/css/grunticon/png/arrow-up-white.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-up-white.png');*/
 }
 .page--body hr, .aside--text hr {
     border: 0 none;
@@ -4144,14 +4146,14 @@ table {
     text-transform: capitalize;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-image: url('/static/dist/css/grunticon/png/arrow-down-white.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-down-white.png');*/
     background-size: 16px;
     background-position: 95% center;
     background-repeat: no-repeat;
 }
 .form .form--select:hover, .form .form--select:focus {
     background-color: white;
-    background-image: url('/static/dist/css/grunticon/png/arrow-down-gray.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-down-gray.png');*/
     color: #A4AFAE;
 }
 .lt-ie10 .form .form--select {
@@ -4212,7 +4214,7 @@ table {
 .page-form .form_alt .form--select {
     border-color: #1B4B66;
     color: #1B4B66;
-    background-image: url('/static/dist/css/grunticon/png/arrow-down-navy.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-down-navy.png');*/
     background-image-size: 80%;
     text-transform: normal;
     letter-spacing: 0px;
@@ -4468,7 +4470,7 @@ table {
     text-align: center;
     background-color: #B89267;
     padding: 1.5em 10%;
-    background-image: url('/static/dist/images/pattern.png');
+    /*background-image: url('/static/dist/images/pattern.png');*/
     background-repeat: repeat;
     font-size: 25.6px;
     font-size: 1.6rem;
@@ -4502,7 +4504,7 @@ table {
 .search-head .search-bar-form .form--select {
     border-color: #1B4B66;
     color: #1B4B66;
-    background-image: url('/static/dist/css/grunticon/png/arrow-down-navy.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-down-navy.png');*/
     background-image-size: 80%;
 }
 .lt-ie10 .search-head .search-bar-form .form--select {
@@ -4880,7 +4882,7 @@ table {
 }
 }
 .photographer--meta:before {
-    background-image: url('/static/dist/css/grunticon/png/location.png');
+    /*background-image: url('/static/dist/css/grunticon/png/location.png');*/
     width: 0.75em;
     height: 1.35em;
     background-position: center;
@@ -5147,7 +5149,7 @@ table {
     left: -1.5em;
 }
 .photographer-list--item.current .photographer--meta:before {
-    background-image: url('/static/dist/css/grunticon/png/location-white.png');
+    /*background-image: url('/static/dist/css/grunticon/png/location-white.png');*/
 }
 .current .photographer-list--link {
     color: white;
@@ -5690,7 +5692,7 @@ table {
 .information--button:after {
     content: ' ';
     display: block;
-    background-image: url('/static/dist/css/grunticon/png/arrow-gold.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-gold.png');*/
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
@@ -5711,7 +5713,7 @@ table {
     color: white;
 }
 .information--button:hover:after {
-    background-image: url('/static/dist/css/grunticon/png/arrow-up-white.png');
+    /*background-image: url('/static/dist/css/grunticon/png/arrow-up-white.png');*/
 }
 .information-icon {
     width: 5em;
@@ -6204,7 +6206,7 @@ table {
 }
 .member .nav-toggle .icon-arrow {
     background-repeat: no-repeat;
-    background-image: url('grunticon/png/arrow-down-white.png');
+    /*background-image: url('grunticon/png/arrow-down-white.png');*/
 }
 .member .nav-toggle.nav-toggle_open {
     color: white;
@@ -6221,7 +6223,7 @@ table {
 }
 .member .member-login--text:before {
     background-repeat: no-repeat;
-    background-image: url('grunticon/png/camera-back-gold.png');
+    /*background-image: url('grunticon/png/camera-back-gold.png');*/
 }
 .member .nav {
     background-color: #B89267;
