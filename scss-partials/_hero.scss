@@ -1,0 +1,78 @@
+.hero,
+.hero_md,
+.hero_lg,
+.hero_xl {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #1C1C1C;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    -webkit-transition: 0.3s all ease-in-out;
+    transition: 0.3s all ease-in-out;
+}
+.hero_md,
+.hero_lg,
+.hero_xl {
+    display: none;
+}
+.hero-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+.hero-content {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    z-index: 100;
+}
+.hero--location {
+    position: absolute;
+    top: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1.5em;
+    margin: 0 48%;
+    background-position: center;
+    top: -5.5em;
+    opacity: 1;
+    -webkit-transition: 0.65s ease;
+    transition: 0.65s ease;
+    background-size: 1.5em;
+    padding: 3.25em 0;
+    z-index: 100;
+}
+.hero--text {
+    width: 80%;
+    max-width: 40em;
+    padding: 3% 0;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+    -webkit-transition: 0.65s ease;
+    transition: 0.65s ease;
+    margin: 0 auto;
+}
+
+
+
+/*------------*/
+/* RESPONSIVE */
+/*------------*/
+
+@media (min-width: 35.5em) {
+    .hero--location {
+        width: 1.875em;
+        background-size: 1.875em;
+        padding: 3em 0;
+    }
+}
