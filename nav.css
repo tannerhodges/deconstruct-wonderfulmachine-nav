@@ -228,7 +228,7 @@
   display: none; }
 
 .nav-list_inline {
-  width: 63%;
+  width: 60%;
   float: none;
   padding: 0;
   position: absolute;
@@ -299,9 +299,9 @@
 /*------------*/
 /* RESPONSIVE */
 /*------------*/
-@media (min-width: 35.5em) {
-  .nav-list_inline {
-    right: 6em; } }
+.nav-list_inline {
+  right: 6em; }
+
 @media (min-width: 60em) {
   .nav-container {
     margin: 0; }
@@ -310,7 +310,7 @@
     margin-top: 0; }
 
   .nav-list_inline {
-    right: 9.25em; }
+    right: 9em; }
 
   .nav-toggle {
     right: 6em; }
@@ -327,9 +327,7 @@
     z-index: 800; } }
 @media (min-width: 74.1875em) {
   .nav-container {
-    float: left;
-    width: 75%;
-    margin-right: 5%; }
+    float: right; }
 
   .nav {
     margin-top: 1em;

@@ -1,3 +1,8 @@
+// Settings
+$toggleBtn-width: 3em;
+$nav-marginRight: 6em;
+$nav-listInline-width: 60%;
+
 // Partials
 @import "scss-partials/header";
 @import "scss-partials/footer";
@@ -41,7 +46,8 @@
     display: none;
 }
 .nav-list_inline {
-    width: 63%;
+    // TODO: Where does this width come from?
+    width: $nav-listInline-width;
     float: none;
     padding: 0;
     position: absolute;
@@ -118,10 +124,9 @@
 /* RESPONSIVE */
 /*------------*/
 
-@media (min-width: 35.5em) {
-    .nav-list_inline {
-        right: 6em;
-    }
+// TODO: Remove right position when toggle disappears
+.nav-list_inline {
+    right: $nav-marginRight;
 }
 
 @media (min-width: 60em) {
@@ -132,10 +137,10 @@
         margin-top: 0;
     }
     .nav-list_inline {
-        right: 9.25em;
+        right: $toggleBtn-width + $nav-marginRight;
     }
     .nav-toggle {
-        right: 6em;
+        right: $nav-marginRight;
     }
     .nav-list {
         background: #1B4B66;
@@ -152,9 +157,10 @@
 
 @media (min-width: 74.1875em) {
     .nav-container {
-        float: left;
-        width: 75%;
-        margin-right: 5%;
+        float: right;
+        // float: left;
+        // width: 75%;
+        // margin-right: 5%;
     }
     .nav {
         margin-top: 1em;
@@ -165,6 +171,7 @@
     }
     .nav-list_inline {
         top: 1.75em;
+        // TODO: Why is this here? Assuming all inline list items should've moved to navList by now.
         display: none;
     }
     .nav-toggle {
