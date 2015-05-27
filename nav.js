@@ -2,8 +2,9 @@
     'use strict';
 
     var $nav = $('.nav'),
-        $nav_dropdown = $('.nav-dropdown'),
-        $nav_toggle = $('.nav-toggle'),
+        $nav_list = $nav.children('.nav-list'),
+        $nav_dropdown = $nav.children('.nav-dropdown'),
+        $nav_toggle = $nav.children('.nav-toggle'),
         $nav_toggle_arrow = $nav_toggle.children('.icon-arrow');
 
     /**
@@ -19,7 +20,30 @@
      * @return {Boolean}
      */
     function isNavLarge() {
-        return 'inline' === $('.nav-dropdown .nav-item:last-child').css('display');
+        return 'inline' === $nav_dropdown.children('.nav-item:last-child').css('display');
+    }
+
+    /**
+     * Get total width of items in the nav list
+     * @return {Number}
+     */
+    function getWidthOfNavItems() {
+        var sum = 0;
+        $nav_list.children('.nav-item').each(function(a, b) {
+            return sum += $(b).width();
+        });
+        return sum;
+    }
+
+    /**
+     * Move all nav items from dropdown to list
+     * @return {void}
+     */
+    function moveAllNavItemsToList() {
+        $nav_list.children('.nav-item').each(function(a, b) {
+            // Move everything in front of the "utility" nav
+            return $(b).insertBefore('.nav-item--about');
+        });
     }
 
     /**
@@ -30,7 +54,7 @@
         var copy;
         if (isNavSmall()) {
             copy = 'Menu';
-        } else if ($('.nav-dropdown').hasClass('nav--closed')) {
+        } else if ($nav_dropdown.hasClass('nav--closed')) {
             copy = 'More';
         } else {
             copy = 'Less';
@@ -39,47 +63,40 @@
     }
 
     /**
-     * Move all nav items from dropdown to list
-     * @return {void}
-     */
-    function moveAllNavItemsToList() {
-        $('.nav-list .nav-item').each(function(a, b) {
-            return $(b).insertBefore('.nav-item--about');
-        });
-    }
-
-    /**
      * Navigation resize handler
      * @return {void}
      */
     function navResizeHandler() {
         var $lastNavItem,
-            sumOfNavItemWidths = 0,
-            nav_list_width = $('.nav-list').width();
+            sumOfNavItemWidths = getWidthOfNavItems(),
+            nav_list_width = $nav_list.width();
 
-        $('.nav-list .nav-item').each(function(a, b) {
-            return sumOfNavItemWidths += $(b).width();
-        });
-
-        $('.nav-dropdown .nav-item').each(function(a, b) {
+        // Move as many items as you can from the dropdown to the list (before the list gets too big)
+        $nav_dropdown.children('.nav-item').each(function(a, b) {
+            // Stop once you reach the first element in the "utility" nav
+            // These items stay in the dropdown until they can *all* fit in the list
             if ($(b).hasClass('nav-item--about')) {
                 return false;
             }
 
+            // Start moving items from the dropdown to the list
             $(b).appendTo('.nav-list');
 
+            // Fit as many items as you can into the list
             if ($(b).width() + sumOfNavItemWidths > nav_list_width) {
-                $(b).prependTo('.nav-dropdown');
+                // Once you break the threshold, revert and stop
+                $(b).prependTo($nav_dropdown);
                 return false;
             }
 
+            // Keep running total of the list width
             sumOfNavItemWidths = $(b).width() + sumOfNavItemWidths;
         });
 
-        $lastNavItem = $('.nav-list .nav-item:last-child');
-
+        // In case the list is still too big, move the last item to the dropdown
+        $lastNavItem = $nav_list.children('.nav-item:last-child');
         if ($lastNavItem.width() + sumOfNavItemWidths > nav_list_width) {
-            $lastNavItem.prependTo('.nav-dropdown');
+            $lastNavItem.prependTo($nav_dropdown);
         }
 
         if (isNavLarge()) {
