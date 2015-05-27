@@ -3,7 +3,6 @@
 
     var $lastNavItem,
         sumOfNavItemWidths,
-        navToggleText,
         nav_list_width;
 
     /**
@@ -12,6 +11,23 @@
      */
     function isNavSmall() {
         return 0 === $('.nav-list .nav-item').length;
+    }
+
+
+    /**
+     * Update toggle text based on nav status
+     * @return {void}
+     */
+    function updateToggleCopy() {
+        var copy;
+        if (isNavSmall()) {
+            copy = 'Menu';
+        } else if ($('.nav-dropdown').hasClass('nav--closed')) {
+            copy = 'More';
+        } else {
+            copy = 'Less';
+        }
+        $('.nav-toggle .nav-toggle--text').text(copy);
     }
 
     /**
@@ -53,15 +69,7 @@
             });
         }
 
-        if (isNavSmall()) {
-            navToggleText = 'Menu';
-        } else if ($('.nav-dropdown').hasClass('nav--closed')) {
-            navToggleText = 'More';
-        } else {
-            navToggleText = 'Less';
-        }
-
-        $('.nav-toggle .nav-toggle--text').text(navToggleText);
+        updateToggleCopy();
     }
 
 
@@ -77,17 +85,12 @@
         $nav_dropdown = $('.nav-dropdown');
         $nav_dropdown.addClass('nav--closed');
 
-        if (!isNavSmall()) {
-            $('.nav-toggle .nav-toggle--text').text('More');
-        }
+        updateToggleCopy();
 
         $('.nav-toggle').on('click', function(event) {
-            var navToggleText;
-
             event.preventDefault();
 
             if ($nav_dropdown.hasClass('nav--closed')) {
-                navToggleText = 'Less';
                 $(this).addClass('nav-toggle--open')
                     .children('.icon-arrow')
                     .addClass('icon-arrow-gold')
@@ -95,7 +98,6 @@
                 $('.nav').removeClass('closed');
                 $nav_dropdown.removeClass('nav--closed');
             } else {
-                navToggleText = 'More';
                 $(this).removeClass('nav-toggle--open')
                     .children('.icon-arrow')
                     .addClass('icon-arrow-down-white')
@@ -103,6 +105,8 @@
                 $('.nav').addClass('closed');
                 $nav_dropdown.addClass('nav--closed');
             }
+
+            updateToggleCopy();
         });
     }
 
