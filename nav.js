@@ -1,12 +1,17 @@
 (function() {
     'use strict';
 
+    var $lastNavItem,
+        sumOfNavItemWidths,
+        navToggleText,
+        nav_list_width;
+
     /**
      * Is nav small?
      * @return {Boolean}
      */
     function isNavSmall() {
-        return 0 === $('.nav-list_inline .nav--item').length;
+        return 0 === $('.nav-list .nav-item').length;
     }
 
     /**
@@ -14,48 +19,43 @@
      * @return {void}
      */
     function navigationResizeHandler() {
-        var $lastNavItem,
-            sumOfNavItemWidths,
-            navToggleText,
-            navListInlineWidth;
-
-        navListInlineWidth = $('.nav-list_inline').width();
+        nav_list_width = $('.nav-list').width();
         sumOfNavItemWidths = 0;
 
-        $('.nav-list_inline .nav--item').each(function(a, b) {
+        $('.nav-list .nav-item').each(function(a, b) {
             return sumOfNavItemWidths += $(b).width();
         });
 
-        $('.nav-list .nav--item').each(function(a, b) {
-            if ($(b).hasClass('nav--item_about')) {
+        $('.nav-dropdown .nav-item').each(function(a, b) {
+            if ($(b).hasClass('nav-item--about')) {
                 return false;
             }
 
-            $(b).appendTo('.nav-list_inline');
+            $(b).appendTo('.nav-list');
 
-            if ($(b).width() + sumOfNavItemWidths > navListInlineWidth) {
-                $(b).prependTo('.nav-list');
+            if ($(b).width() + sumOfNavItemWidths > nav_list_width) {
+                $(b).prependTo('.nav-dropdown');
                 return false;
             }
 
             sumOfNavItemWidths = $(b).width() + sumOfNavItemWidths;
         });
 
-        $lastNavItem = $('.nav-list_inline .nav--item:last-child');
+        $lastNavItem = $('.nav-list .nav-item:last-child');
 
-        if ($lastNavItem.width() + sumOfNavItemWidths > navListInlineWidth) {
-            $lastNavItem.prependTo('.nav-list');
+        if ($lastNavItem.width() + sumOfNavItemWidths > nav_list_width) {
+            $lastNavItem.prependTo('.nav-dropdown');
         }
 
-        if ('inline' === $('.nav-list .nav--item:last-child').css('display')) {
-            $('.nav-list_inline .nav--item').each(function(a, b) {
-                return $(b).insertBefore('.nav--item_about');
+        if ('inline' === $('.nav-dropdown .nav-item:last-child').css('display')) {
+            $('.nav-list .nav-item').each(function(a, b) {
+                return $(b).insertBefore('.nav-item--about');
             });
         }
 
         if (isNavSmall()) {
             navToggleText = 'Menu';
-        } else if ($('.nav-list').hasClass('nav_closed')) {
+        } else if ($('.nav-dropdown').hasClass('nav--closed')) {
             navToggleText = 'More';
         } else {
             navToggleText = 'Less';
@@ -70,14 +70,12 @@
      * @return {void}
      */
     function navigation() {
-        var $navList;
+        var $nav_dropdown;
 
         navigationResizeHandler();
 
-        $navList = $('.nav-list');
-        $navList.addClass('nav_closed');
-
-        $('.member-tab').addClass('member-tab_hidden');
+        $nav_dropdown = $('.nav-dropdown');
+        $nav_dropdown.addClass('nav--closed');
 
         if (!isNavSmall()) {
             $('.nav-toggle .nav-toggle--text').text('More');
@@ -88,54 +86,44 @@
 
             event.preventDefault();
 
-            if ($navList.hasClass('nav_closed')) {
+            if ($nav_dropdown.hasClass('nav--closed')) {
                 navToggleText = 'Less';
-                $(this).addClass('nav-toggle_open')
+                $(this).addClass('nav-toggle--open')
                     .children('.icon-arrow')
                     .addClass('icon-arrow-gold')
                     .removeClass('icon-arrow-down-white');
                 $('.nav').removeClass('closed');
-                $navList.removeClass('nav_closed');
-                $('.member-tab').removeClass('member-tab_hidden');
+                $nav_dropdown.removeClass('nav--closed');
             } else {
                 navToggleText = 'More';
-                $(this).removeClass('nav-toggle_open')
+                $(this).removeClass('nav-toggle--open')
                     .children('.icon-arrow')
                     .addClass('icon-arrow-down-white')
                     .removeClass('icon-arrow-gold');
-
                 $('.nav').addClass('closed');
-                $navList.addClass('nav_closed');
-                $('.member-tab').addClass('member-tab_hidden');
+                $nav_dropdown.addClass('nav--closed');
             }
         });
     }
 
     /**
-     * Home nav check
-     * @return {void}
-     */
-    function homeNavCheck() {
-        $('.home .header').addClass('transparent');
-        $('.home .nav').addClass('transparent');
-    }
-
-    /**
-     * Home nav check
+     * Init handlers
      * @return {void}
      */
     function initHandlers() {
-        $(window).resize(_.throttle(navigationResizeHandler, 50));
-        $(window).trigger('resize');
+        // TODO: Do we need to throttle this?
+        $(window).resize(navigationResizeHandler);
+        // TODO: Should we really need this extra call?
+        // $(window).trigger('resize');
+        navigationResizeHandler();
     }
 
     /**
-     * Home nav check
+     * Init
      * @return {void}
      */
     function init() {
         navigation();
-        homeNavCheck();
         initHandlers();
     }
 

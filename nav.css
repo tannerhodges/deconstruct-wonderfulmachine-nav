@@ -224,11 +224,11 @@
   height: 0;
   max-height: 0; }
 
-.nav_closed {
+.nav--closed {
   display: none; }
 
-.nav-list_inline {
-  width: 60%;
+.nav-list {
+  width: 70%;
   float: none;
   padding: 0;
   position: absolute;
@@ -237,7 +237,7 @@
   right: 0em;
   z-index: 800; }
 
-.nav-list_inline .nav--item {
+.nav-list .nav-item {
   margin-right: 1.5em;
   font-size: 0.8125em;
   display: inline-block; }
@@ -249,42 +249,40 @@
   color: white;
   padding-right: 2em;
   padding-bottom: 0.25em;
-  border-bottom: 1px solid white;
   font-size: 0.8125em; }
 
 .nav-toggle:hover {
   text-decoration: none; }
 
-.nav-toggle.nav-toggle_open {
+.nav-toggle.nav-toggle--open {
   background-position: right top;
   color: #B89267;
   border-color: #B89267; }
 
-.nav-list {
+.nav-dropdown {
   margin: 0;
   padding: 0.5em 0;
   position: static;
   z-index: 800; }
 
-.nav-list .nav--item {
+.nav-dropdown .nav-item {
   padding: 0.25em 0; }
 
-.nav--item {
+.nav-item {
   list-style: none;
   display: block; }
 
-.nav-link, .nav--item-link {
+.nav-link, .nav-item-link {
   color: white; }
 
-.nav-link.current, .current.nav--item-link {
-  color: #B89267;
-  border-bottom: 1px solid #B89267; }
+.nav-link.current, .current.nav-item-link {
+  color: #B89267; }
 
-.nav-link:hover, .nav--item-link:hover {
+.nav-link:hover, .nav-item-link:hover {
   color: #00a3ad;
   text-decoration: none; }
 
-.nav--item-link {
+.nav-item-link {
   padding: 0.55em 0 0.25em 0;
   display: inline-block; }
 
@@ -299,7 +297,7 @@
 /*------------*/
 /* RESPONSIVE */
 /*------------*/
-.nav-list_inline {
+.nav-list {
   right: 6em; }
 
 @media (min-width: 60em) {
@@ -309,13 +307,13 @@
   .nav {
     margin-top: 0; }
 
-  .nav-list_inline {
+  .nav-list {
     right: 9em; }
 
   .nav-toggle {
     right: 6em; }
 
-  .nav-list {
+  .nav-dropdown {
     background: #1B4B66;
     background: rgba(27, 75, 102, 0.3);
     position: absolute;
@@ -333,17 +331,17 @@
     margin-top: 1em;
     text-align: right; }
 
-  .nav_closed {
+  .nav--closed {
     display: block; }
 
-  .nav-list_inline {
+  .nav-list {
     top: 1.75em;
     display: none; }
 
   .nav-toggle {
     display: none; }
 
-  .nav-list {
+  .nav-dropdown {
     margin-top: 0.75em;
     background-color: transparent !important;
     position: static;
@@ -353,10 +351,10 @@
     margin: 0.75em;
     border: 0 none; }
 
-  .nav--item {
+  .nav-item {
     display: inline;
     font-size: 0.8125em;
     margin-right: 1.5em; }
 
-  .nav--item:last-child {
+  .nav-item:last-child {
     margin-right: 0; } }
