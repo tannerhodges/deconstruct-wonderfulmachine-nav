@@ -39,7 +39,7 @@
      * Move all nav items from dropdown to list
      * @return {void}
      */
-    function moveAllNavItemsToList() {
+    function moveItemsToList() {
         $nav_list.children('.nav-item').each(function(a, b) {
             // Move everything in front of the "utility" nav
             return $(b).insertBefore('.nav-item--about');
@@ -100,7 +100,7 @@
         }
 
         if (isNavLarge()) {
-            moveAllNavItemsToList();
+            moveItemsToList();
         }
 
         updateToggleCopy();
