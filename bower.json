@@ -1,0 +1,21 @@
+{
+  "name": "deconstruct-wonderfulmachine-nav",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tannerhodges/deconstruct-wonderfulmachine-nav",
+  "authors": [
+    "Tanner Hodges <austintannerhodges@gmail.com>"
+  ],
+  "description": "Deconstructing wonderfulmachine.com's Priority+ Navigation",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
