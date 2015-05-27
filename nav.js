@@ -1,12 +1,10 @@
 (function() {
     'use strict';
 
-    var $nav_dropdown = $('.nav-dropdown'),
-        $nav_toggle = $('.nav-toggle');
-
-    var $lastNavItem,
-        sumOfNavItemWidths,
-        nav_list_width;
+    var $nav = $('.nav'),
+        $nav_dropdown = $('.nav-dropdown'),
+        $nav_toggle = $('.nav-toggle'),
+        $nav_toggle_arrow = $nav_toggle.children('.icon-arrow');
 
     /**
      * Is nav small?
@@ -16,6 +14,13 @@
         return 0 === $('.nav-list .nav-item').length;
     }
 
+    /**
+     * Is nav large?
+     * @return {Boolean}
+     */
+    function isNavLarge() {
+        return 'inline' === $('.nav-dropdown .nav-item:last-child').css('display');
+    }
 
     /**
      * Update toggle text based on nav status
@@ -34,12 +39,23 @@
     }
 
     /**
+     * Move all nav items from dropdown to list
+     * @return {void}
+     */
+    function moveAllNavItemsToList() {
+        $('.nav-list .nav-item').each(function(a, b) {
+            return $(b).insertBefore('.nav-item--about');
+        });
+    }
+
+    /**
      * Navigation resize handler
      * @return {void}
      */
     function navResizeHandler() {
-        nav_list_width = $('.nav-list').width();
-        sumOfNavItemWidths = 0;
+        var $lastNavItem,
+            sumOfNavItemWidths = 0,
+            nav_list_width = $('.nav-list').width();
 
         $('.nav-list .nav-item').each(function(a, b) {
             return sumOfNavItemWidths += $(b).width();
@@ -66,15 +82,38 @@
             $lastNavItem.prependTo('.nav-dropdown');
         }
 
-        if ('inline' === $('.nav-dropdown .nav-item:last-child').css('display')) {
-            $('.nav-list .nav-item').each(function(a, b) {
-                return $(b).insertBefore('.nav-item--about');
-            });
+        if (isNavLarge()) {
+            moveAllNavItemsToList();
         }
 
         updateToggleCopy();
     }
 
+    /**
+     * Open nav dropdown
+     * @return {void}
+     */
+    function openNavDropdown() {
+        $nav_toggle.addClass('nav-toggle--open');
+        $nav_toggle_arrow
+            .addClass('icon-arrow-gold')
+            .removeClass('icon-arrow-down-white');
+        $nav.removeClass('closed');
+        $nav_dropdown.removeClass('nav--closed');
+    }
+
+    /**
+     * Close nav dropdown
+     * @return {void}
+     */
+    function closeNavDropdown() {
+        $nav_toggle.removeClass('nav-toggle--open')
+        $nav_toggle_arrow
+            .addClass('icon-arrow-down-white')
+            .removeClass('icon-arrow-gold');
+        $nav.addClass('closed');
+        $nav_dropdown.addClass('nav--closed');
+    }
 
     /**
      * Nav toggle handler
@@ -85,33 +124,12 @@
         e.preventDefault();
 
         if ($nav_dropdown.hasClass('nav--closed')) {
-            $nav_toggle.addClass('nav-toggle--open')
-                .children('.icon-arrow')
-                .addClass('icon-arrow-gold')
-                .removeClass('icon-arrow-down-white');
-            $('.nav').removeClass('closed');
-            $nav_dropdown.removeClass('nav--closed');
+            openNavDropdown();
         } else {
-            $nav_toggle.removeClass('nav-toggle--open')
-                .children('.icon-arrow')
-                .addClass('icon-arrow-down-white')
-                .removeClass('icon-arrow-gold');
-            $('.nav').addClass('closed');
-            $nav_dropdown.addClass('nav--closed');
+            closeNavDropdown();
         }
 
         updateToggleCopy();
-    }
-
-
-    /**
-     * Init navigation
-     * @return {void}
-     */
-    function initNavigation() {
-        // TODO: Do we need this addClass call? Isn't it already set in the markup?
-        $nav_dropdown.addClass('nav--closed');
-        $('.nav-toggle').on('click', navToggleHandler);
     }
 
     /**
@@ -119,12 +137,11 @@
      * @return {void}
      */
     function init() {
-        initNavigation();
         // TODO: Why does navResizeHandler shortcircuit around 350px unless you call it twice?
         navResizeHandler();
         navResizeHandler();
-        // TODO: Should we throttle this?
-        $(window).resize(navResizeHandler);
+        $(window).resize(navResizeHandler); // TODO: Should we throttle this?
+        $('.nav-toggle').on('click', navToggleHandler);
     }
 
     init();
