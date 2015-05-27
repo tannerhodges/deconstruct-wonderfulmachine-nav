@@ -1,18 +1,20 @@
 (function() {
     'use strict';
 
-    var $nav = $('.nav'),
+    var $nav_container = $('.nav-container'),
+        $nav = $('.nav'),
         $nav_list = $nav.children('.nav-list'),
         $nav_dropdown = $nav.children('.nav-dropdown'),
         $nav_toggle = $nav.children('.nav-toggle'),
-        $nav_toggle_arrow = $nav_toggle.children('.icon-arrow');
+        $nav_toggle_arrow = $nav_toggle.children('.icon-arrow'),
+        $siteTitle = $('.site-title');
 
     /**
      * Is nav small?
      * @return {Boolean}
      */
     function isNavSmall() {
-        return 0 === $('.nav-list .nav-item').length;
+        return 0 === $nav_list.children('.nav-item').length;
     }
 
     /**
@@ -24,10 +26,25 @@
     }
 
     /**
+     * Get the max width the nav list can be
+     * @return {Number}
+     */
+    function getNavMaxWidth() {
+        // TODO: Should we get this value from CSS?
+        var navWidthPercentage = 0.8;
+
+        var container_width = Math.floor($nav_container.width() * navWidthPercentage),
+            toggle_width = Math.ceil($nav_toggle.width()),
+            siteTitle_width = Math.ceil($siteTitle.width());
+
+        return container_width - toggle_width - siteTitle_width;
+    }
+
+    /**
      * Get total width of items in the nav list
      * @return {Number}
      */
-    function getWidthOfNavItems() {
+    function getNavItemsWidth() {
         var sum = 0;
         $nav_list.children('.nav-item').each(function(a, b) {
             return sum += $(b).width();
@@ -41,7 +58,7 @@
      */
     function moveItemsToList() {
         $nav_list.children('.nav-item').each(function(a, b) {
-            // Move everything in front of the "utility" nav
+            // Move everything in front of the secondary nav
             return $(b).insertBefore('.nav-item--about');
         });
     }
@@ -64,40 +81,34 @@
 
     /**
      * Navigation resize handler
+     * Note: Secondary nav items stay in the dropdown until they can *all* fit in the list
      * @return {void}
      */
     function navResizeHandler() {
         var $lastNavItem,
-            sumOfNavItemWidths = getWidthOfNavItems(),
-            nav_list_width = $nav_list.width();
+            nav_items_width = 0,
+            nav_max_width = getNavMaxWidth();
 
-        // Move as many items as you can from the dropdown to the list (before the list gets too big)
+        // Move everything to the dropdown
+        if ($nav_list.children('.nav-item').length > 0) {
+            $nav_list.children('.nav-item').prependTo($nav_dropdown);
+        }
+
+        // Move as many items as you can back to the list
         $nav_dropdown.children('.nav-item').each(function(a, b) {
-            // Stop once you reach the first element in the "utility" nav
-            // These items stay in the dropdown until they can *all* fit in the list
-            if ($(b).hasClass('nav-item--about')) {
-                return false;
-            }
+            // Make visible so we can get the element's width
+            $(b).appendTo($nav_list);
+            nav_items_width += $(b).width();
 
-            // Start moving items from the dropdown to the list
-            $(b).appendTo('.nav-list');
-
-            // Fit as many items as you can into the list
-            if ($(b).width() + sumOfNavItemWidths > nav_list_width) {
-                // Once you break the threshold, revert and stop
+            // Check thresholds
+            var isNavTooBig = nav_items_width > nav_max_width,
+                hasReachedSecondaryNav = $(b).hasClass('nav-item--about');
+            // If we hit them, revert and exit loop
+            if (isNavTooBig || hasReachedSecondaryNav) {
                 $(b).prependTo($nav_dropdown);
                 return false;
             }
-
-            // Keep running total of the list width
-            sumOfNavItemWidths = $(b).width() + sumOfNavItemWidths;
         });
-
-        // In case the list is still too big, move the last item to the dropdown
-        $lastNavItem = $nav_list.children('.nav-item:last-child');
-        if ($lastNavItem.width() + sumOfNavItemWidths > nav_list_width) {
-            $lastNavItem.prependTo($nav_dropdown);
-        }
 
         if (isNavLarge()) {
             moveItemsToList();
@@ -154,8 +165,6 @@
      * @return {void}
      */
     function init() {
-        // TODO: Why does navResizeHandler shortcircuit around 350px unless you call it twice?
-        navResizeHandler();
         navResizeHandler();
         $(window).resize(navResizeHandler); // TODO: Should we throttle this?
         $('.nav-toggle').on('click', navToggleHandler);
