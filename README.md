@@ -2,6 +2,8 @@
 
 Here's the original: [wonderfulmachine.com](https://wonderfulmachine.com/)
 
+Here's my refactored version: [tannerhodges.github.io/deconstruct-wonderfulmachine-nav](http://tannerhodges.github.io/deconstruct-wonderfulmachine-nav/)
+
 ## Goals
 
 1. Figure out how they done it.
