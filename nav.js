@@ -1,6 +1,9 @@
 (function() {
     'use strict';
 
+    var $nav_dropdown = $('.nav-dropdown'),
+        $nav_toggle = $('.nav-toggle');
+
     var $lastNavItem,
         sumOfNavItemWidths,
         nav_list_width;
@@ -34,7 +37,7 @@
      * Navigation resize handler
      * @return {void}
      */
-    function navigationResizeHandler() {
+    function navResizeHandler() {
         nav_list_width = $('.nav-list').width();
         sumOfNavItemWidths = 0;
 
@@ -74,52 +77,41 @@
 
 
     /**
-     * Navigation
+     * Nav toggle handler
+     * @param  {Event}  e
      * @return {void}
      */
-    function navigation() {
-        var $nav_dropdown;
+    function navToggleHandler(e) {
+        e.preventDefault();
 
-        navigationResizeHandler();
-
-        $nav_dropdown = $('.nav-dropdown');
-        $nav_dropdown.addClass('nav--closed');
+        if ($nav_dropdown.hasClass('nav--closed')) {
+            $nav_toggle.addClass('nav-toggle--open')
+                .children('.icon-arrow')
+                .addClass('icon-arrow-gold')
+                .removeClass('icon-arrow-down-white');
+            $('.nav').removeClass('closed');
+            $nav_dropdown.removeClass('nav--closed');
+        } else {
+            $nav_toggle.removeClass('nav-toggle--open')
+                .children('.icon-arrow')
+                .addClass('icon-arrow-down-white')
+                .removeClass('icon-arrow-gold');
+            $('.nav').addClass('closed');
+            $nav_dropdown.addClass('nav--closed');
+        }
 
         updateToggleCopy();
-
-        $('.nav-toggle').on('click', function(event) {
-            event.preventDefault();
-
-            if ($nav_dropdown.hasClass('nav--closed')) {
-                $(this).addClass('nav-toggle--open')
-                    .children('.icon-arrow')
-                    .addClass('icon-arrow-gold')
-                    .removeClass('icon-arrow-down-white');
-                $('.nav').removeClass('closed');
-                $nav_dropdown.removeClass('nav--closed');
-            } else {
-                $(this).removeClass('nav-toggle--open')
-                    .children('.icon-arrow')
-                    .addClass('icon-arrow-down-white')
-                    .removeClass('icon-arrow-gold');
-                $('.nav').addClass('closed');
-                $nav_dropdown.addClass('nav--closed');
-            }
-
-            updateToggleCopy();
-        });
     }
 
+
     /**
-     * Init handlers
+     * Init navigation
      * @return {void}
      */
-    function initHandlers() {
-        // TODO: Do we need to throttle this?
-        $(window).resize(navigationResizeHandler);
-        // TODO: Should we really need this extra call?
-        // $(window).trigger('resize');
-        navigationResizeHandler();
+    function initNavigation() {
+        // TODO: Do we need this addClass call? Isn't it already set in the markup?
+        $nav_dropdown.addClass('nav--closed');
+        $('.nav-toggle').on('click', navToggleHandler);
     }
 
     /**
@@ -127,8 +119,12 @@
      * @return {void}
      */
     function init() {
-        navigation();
-        initHandlers();
+        initNavigation();
+        // TODO: Why does navResizeHandler shortcircuit around 350px unless you call it twice?
+        navResizeHandler();
+        navResizeHandler();
+        // TODO: Should we throttle this?
+        $(window).resize(navResizeHandler);
     }
 
     init();
