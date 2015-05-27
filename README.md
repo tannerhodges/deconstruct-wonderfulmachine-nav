@@ -6,8 +6,8 @@ Here's my refactored version: [tannerhodges.github.io/deconstruct-wonderfulmachi
 
 ## Goals
 
-1. Figure out how they done it.
-2. Make a version that works for me.
+- [x] Figure out how they done it.
+- [ ] Make a version that works for me.
 
 ## Process
 
