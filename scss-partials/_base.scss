@@ -1,0 +1,24 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "Helvetica", sans-serif;
+    $color-start: #ffffff;
+    $color-end: #eeeeee;
+    background-color: $color-start;
+    background-size: 100%;
+    background-image: -webkit-radial-gradient(center, ellipse cover, $color-start 0%, $color-end 100%);
+    background-image: radial-gradient(ellipse cover at center, $color-start 0%, $color-end 100%);
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}

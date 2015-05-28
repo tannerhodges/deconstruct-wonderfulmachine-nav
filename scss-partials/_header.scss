@@ -1,47 +1,29 @@
 .header {
-    background-color: #1B4B66;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 700;
     width: 100%;
-    -webkit-transition: 0.65s ease;
-    transition: 0.65s ease;
+    background-color: #1B4B66;
 }
 .header-content {
-    position: relative;
     -webkit-transition: 0.35s ease;
     transition: 0.35s ease;
     padding: 0;
-    padding-bottom: 0;
 }
 .header-wrapper {
     position: relative;
-    margin: 0;
     padding: 0 1.25em;
 }
 
 
 
 .site-title {
-    position: relative;
     float: left;
-    margin: 0;
-    width: 20%;
-    min-width: 9em;
     line-height: 3em;
 }
 .site-title--link {
-    width: 100%;
-    display: block;
-    color: #fff;
-}
-
-
-
-.home-content {
-    z-index: 600;
-    position: relative;
+    color: $link-color;
 }
 
 
@@ -53,18 +35,5 @@
 @media (min-width: 60em) {
     .header-content {
         padding: 1.75em 0;
-    }
-    .site-title {
-        margin: 0;
-    }
-    .site-title--link {
-        width: 12.8125em;
-        height: 3.625em;
-    }
-}
-
-@media (min-width: 74.1875em) {
-    .header.transparent {
-        background-color: transparent;
     }
 }

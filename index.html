@@ -11,26 +11,14 @@
     <link href="base.css" rel="stylesheet">
     <link href="nav.css" rel="stylesheet">
 
-    <script type="text/javascript" src="./wonderfulmachine.com_files/modernizr.min.js"></script>
+    <script type="text/javascript" src="./js/modernizr.min.js"></script>
 
     <!-- LiveReload -->
     <script>if (window.location.protocol === 'file:') { document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>') }</script>
 </head>
 <body>
-    <style>
-    html,
-    body,
-    .home {
-        height:100%;
-    }
-    </style>
-    <noscript>&lt;div class="hero" style="background-image:url('https://wonderfulmachine.com/images/uploads/hero_todd_spoth_portrait.jpg');"&gt;&lt;/div&gt;</noscript>
-    <div class="hero_md" data-style="background-image:url(&#39;https://wonderfulmachine.com/images/resized/images/uploads/hero_todd_spoth_portrait_1024x649.jpg&#39;);" style="display: block; background-image: url(https://wonderfulmachine.com/images/resized/images/uploads/hero_todd_spoth_portrait_1024x649.jpg);"></div>
-    <div class="hero_lg" data-style="background-image:url(&#39;https://wonderfulmachine.com/images/resized/images/uploads/hero_todd_spoth_portrait_1440x913.jpg&#39;);"></div>
-    <div class="hero_xl" data-style="background-image:url(&#39;https://wonderfulmachine.com/images/uploads/hero_todd_spoth_portrait.jpg&#39;);"></div>
-
     <div class="home">
-        <div class="header transparent">
+        <header class="header">
             <div class="header-content">
                 <div class="header-wrapper clearfix">
                     <div class="site-title">
@@ -38,10 +26,9 @@
                     </div>
 
                     <div class="nav-container">
-                        <nav class="nav transparent closed">
+                        <nav class="nav closed">
                             <a class="nav-toggle" href="#">
-                                <span class="nav-toggle--text">More</span>
-                                <span class="icon-arrow icon-arrow-down-white"></span>
+                                <span class="nav-toggle-copy">More</span>
                             </a>
 
                             <!-- Priority Nav -->
@@ -50,22 +37,22 @@
 
                             <!-- Dropdown Nav -->
                             <ul class="nav-dropdown nav--closed">
-                                <li class="nav-item nav-item--findPhotographers">
+                                <li class="nav-item">
                                     <a class="nav-item-link" href="#">Find Photographers</a>
                                 </li>
-                                <li class="nav-item nav-item--shootProduction">
+                                <li class="nav-item">
                                     <a class="nav-item-link" href="#">Shoot Production</a>
                                 </li>
-                                <li class="nav-item nav-item--stockRequests">
+                                <li class="nav-item">
                                     <a class="nav-item-link" href="#">Stock Requests</a>
                                 </li>
-                                <li class="nav-item nav-item--about">
+                                <li class="nav-item nav-item--secondary">
                                     <a class="nav-item-link" href="#">About</a>
                                 </li>
-                                <li class="nav-item nav-item--blog">
+                                <li class="nav-item">
                                     <a class="nav-item-link" href="#">Blog</a>
                                 </li>
-                                <li class="nav-item nav-item--contact">
+                                <li class="nav-item">
                                     <a class="nav-item-link" href="#">Contact</a>
                                 </li>
                             </ul>
@@ -73,26 +60,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="hero-wrapper">
-            <div class="hero-content"></div>
-        </div>
+        </header>
     </div>
 
-    <div class="home-content"></div>
-
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-wrapper clearfix">
-                <div class="footer-copy"></div>
-            </div>
-        </div>
-        <div class="footer-content_opac"></div>
-    </div>
-
-    <!-- This is where the nav JS comes from -->
-    <!-- <script src="./wonderfulmachine.com_files/wm-133a278c.js"></script> -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="nav.js"></script>
 </body>

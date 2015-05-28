@@ -6,7 +6,7 @@
         $nav_list = $nav.children('.nav-list'),
         $nav_dropdown = $nav.children('.nav-dropdown'),
         $nav_toggle = $nav.children('.nav-toggle'),
-        $nav_toggle_arrow = $nav_toggle.children('.icon-arrow'),
+        $nav_toggle_copy = $nav_toggle.children('.nav-toggle-copy'),
         $siteTitle = $('.site-title');
 
     /**
@@ -59,7 +59,7 @@
     function moveItemsToList() {
         $nav_list.children('.nav-item').each(function(a, b) {
             // Move everything in front of the secondary nav
-            return $(b).insertBefore('.nav-item--about');
+            return $(b).insertBefore('.nav-item--secondary');
         });
     }
 
@@ -76,7 +76,7 @@
         } else {
             copy = 'Less';
         }
-        $('.nav-toggle .nav-toggle--text').text(copy);
+        $nav_toggle_copy.text(copy);
     }
 
     /**
@@ -102,7 +102,7 @@
 
             // Check thresholds
             var isNavTooBig = nav_items_width > nav_max_width,
-                hasReachedSecondaryNav = $(b).hasClass('nav-item--about');
+                hasReachedSecondaryNav = $(b).hasClass('nav-item--secondary');
             // If we hit them, revert and exit loop
             if (isNavTooBig || hasReachedSecondaryNav) {
                 $(b).prependTo($nav_dropdown);
@@ -123,9 +123,6 @@
      */
     function openNavDropdown() {
         $nav_toggle.addClass('nav-toggle--open');
-        $nav_toggle_arrow
-            .addClass('icon-arrow-gold')
-            .removeClass('icon-arrow-down-white');
         $nav.removeClass('closed');
         $nav_dropdown.removeClass('nav--closed');
     }
@@ -135,10 +132,7 @@
      * @return {void}
      */
     function closeNavDropdown() {
-        $nav_toggle.removeClass('nav-toggle--open')
-        $nav_toggle_arrow
-            .addClass('icon-arrow-down-white')
-            .removeClass('icon-arrow-gold');
+        $nav_toggle.removeClass('nav-toggle--open');
         $nav.addClass('closed');
         $nav_dropdown.addClass('nav--closed');
     }

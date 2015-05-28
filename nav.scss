@@ -1,52 +1,41 @@
+/**
+ * TODO:
+ * - Do we need z-index?
+ */
+
 // Settings
 $toggleBtn-width: 4.5em;
 $nav-height: 3em;
+$nav-zIndex: 800;
 $nav-item-margin: 1.5em;
 $nav-list-width: 70%;
+$link-color: #fff;
 
 // Partials
+@import "scss-partials/base";
 @import "scss-partials/header";
-@import "scss-partials/footer";
-@import "scss-partials/hero";
 
-// Base
-.clearfix:before,
-.clearfix:after {
-    content: "";
-    display: table;
-}
-.clearfix:after {
-    clear: both;
-}
-.clearfix {
-    zoom: 1; /* For IE 6/7 (trigger hasLayout) */
-}
-
-// Nav
 .nav-container {
 }
 .nav {
     display: block;
     margin: $nav-height 0 0;
-    max-height: 20em;
+    text-align: center;
 }
 .nav.closed {
     height: 0;
-    max-height: 0;
 }
 .nav--closed {
     display: none;
 }
 .nav-list {
-    // TODO: Where does this width come from?
-    width: $nav-list-width;
     float: none;
     position: absolute;
     top: 0;
     right: $toggleBtn-width + $nav-item-margin;
-    z-index: 800;
+    z-index: $nav-zIndex;
+    width: $nav-list-width;
     margin: 1em 0;
-    padding: 0;
     text-align: right;
 }
 .nav-list .nav-item {
@@ -58,9 +47,7 @@ $nav-list-width: 70%;
     right: 0;
     top: 1em;
     width: $toggleBtn-width;
-
-    // Skin
-    color: #fff;
+    color: $link-color;
 }
 .nav-toggle:hover {
     text-decoration: none;
@@ -68,39 +55,31 @@ $nav-list-width: 70%;
 .nav-toggle.nav-toggle--open {
 }
 .nav-dropdown {
+    position: static;
+    z-index: $nav-zIndex;
     margin: 0;
     padding: 0.5em 0;
-    position: static;
-    z-index: 800;
 }
 .nav-dropdown .nav-item {
     padding: 0.25em 0;
 }
 .nav-item {
-    list-style: none;
     display: block;
+    list-style: none;
 }
-.nav-link, .nav-item-link {
-    color: #fff;
+.nav-link,
+.nav-item-link {
+    color: $link-color;
 }
-.nav-link.current, .current.nav-item-link {
+.nav-link.current,
+.current.nav-item-link {
 }
-.nav-link:hover, .nav-item-link:hover {
+.nav-link:hover,
+.nav-item-link:hover {
     text-decoration: none;
 }
 .nav-item-link {
-    // padding: 0.55em 0 0.25em 0;
     display: inline-block;
-}
-
-// Icons
-.icon-arrow {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background-size: contain;
-    right: 0;
-    top: 2px;
 }
 
 
@@ -114,45 +93,36 @@ $nav-list-width: 70%;
         right: $toggleBtn-width + $nav-item-margin;
     }
     .nav-dropdown {
-        background: #1B4B66;
-        background: rgba(27, 75, 102, 0.3);
         position: absolute;
-        right: 4em;
-        top: 3.25em;
-        padding: 1.25em 1.25em;
-        border-radius: 8px;
-        border: 2px solid #F2F5F4;
-        z-index: 800;
+        top: 4.75em;
+        right: 0;
+        z-index: $nav-zIndex;
+        padding: 0 1.25em 1.25em;
+        background: #1B4B66;
     }
 }
 
 @media (min-width: 74.1875em) {
-    .nav-container {
-        float: right;
-    }
     .nav {
         margin-top: 1em;
         text-align: right;
     }
+    // TODO: Making the "closed" dropdown work like the main nav is a bit awkward... Why not just use the main nav?
     .nav--closed {
         display: block;
     }
-    .nav-list {
-        top: 1.75em;
-        // TODO: Why is this here? Assuming all inline list items should've moved to nav-list by now.
-        display: none;
-    }
+    // Assuming all inline list items have been moved to the nav-list by now
+    .nav-list,
     .nav-toggle {
         display: none;
     }
+    // Make the dropdown look like the main list now
     .nav-dropdown {
-        margin-top: 0.75em;
         position: static;
         right: auto;
         top: auto;
-        padding: 0;
         margin: 0.75em;
-        border: 0 none;
+        padding: 0;
     }
     .nav-item {
         display: inline;
